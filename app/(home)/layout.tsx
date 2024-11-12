@@ -1,6 +1,7 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import React from 'react'
+import Header from './_components/common/Header';
 
 type Props = {}
 
@@ -13,14 +14,16 @@ const MainLayout = async ({
     const isUserAuthenticated = await isAuthenticated()
 
     const user = await getUser()
-    console.log(user.id)
 
     if (!isUserAuthenticated) {
         redirect("/")
     }
     return (
-        <div>
-            {children}
+        <div className='w-full h-auto min-h-screen !bg-[#f8f8f8] dark:!bg-background'>
+            <Header />
+            <div>
+                {children}
+            </div>
         </div>
     )
 }
