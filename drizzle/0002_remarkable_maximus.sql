@@ -1,0 +1,1 @@
+ALTER TABLE "document" ALTER COLUMN "theme_color" SET DEFAULT '#22C55E';

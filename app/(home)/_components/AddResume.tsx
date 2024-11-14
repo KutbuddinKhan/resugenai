@@ -23,7 +23,6 @@ const AddResume = () => {
         );
     }, [mutate, router])
 
-
     return (
         <>
             <div

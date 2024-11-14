@@ -15,6 +15,13 @@
       "when": 1731524699715,
       "tag": "0001_military_speed",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1731583209432,
+      "tag": "0002_remarkable_maximus",
+      "breakpoints": true
     }
   ]
 }
