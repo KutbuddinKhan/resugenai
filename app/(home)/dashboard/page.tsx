@@ -2,35 +2,23 @@ import React from 'react'
 import AddResume from '../_components/AddResume'
 import ResumeList from '../_components/ResumeList'
 
-type Props = {}
-
-const Page = (props: Props) => {
+const Page = () => {
   return (
     <div className='w-full'>
-      <div className='w-full mx-auto max-w-7xl py-5 px-5'>
-        <div className='flex items-center justify-between'>
+      <div className='w-full mx-auto max-w-7xl py-5 px-5 md:px-0'>
+        <div className='flex flex-col md:flex-row items-center justify-between'>
           <div>
-            <h1 className='text-2xl font-bold'>
-              Resume Builder
-            </h1>
-            <p className='text-base dark:text-inherit'>
-              Build your resume in minutes
-            </p>
-          </div>
-
-          <div className='shrink-0 flex items-center gap-3'>
-            {/* <TrashListBox /> */}
+            <h1 className='text-2xl font-bold'>ResuGenie.ai</h1>
+            <p className='text-base dark:text-inherit'>Craft a Professional Resume in Minutes with AI</p>
           </div>
         </div>
 
         <div className='w-full pt-11'>
-          <h5 className='text-xl font-semibold dark:text-inherit mb-3'>
-              All Resume
-            </h5> 
-            <div className='flex flex-wrap w-full gap-5'>
-             <AddResume />
-              <ResumeList />
-            </div>
+          <h5 className='text-xl font-semibold dark:text-inherit mb-3'>All Resumes</h5>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
+            <AddResume />
+            <ResumeList />
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 "use client"
-
 import useCreateDocument from "@/features/document/use-create-document";
 import { FileText, Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -27,16 +26,14 @@ const AddResume = () => {
         <>
             <div
                 role="button"
-                className="p-[2px] w-full cursor-pointer max-w-[164px]"
+                className="p-[2px] cursor-pointer rounded-xl transition-all hover:shadow-lg hover:-translate-y-1 shadow-md overflow-hidden"
                 onClick={onCreate}
             >
-                <div className="py-24 h-[183px] flex flex-col rounded-lg gap-2 w-full max-w-full items-center justify-center border bg-white hover:border-primary transition hover:shadow dark:bg-secondary">
+                <div className="py-24 h-[183px] flex flex-col rounded-lg gap-2 items-center justify-center border bg-white hover:border-primary transition hover:shadow dark:bg-secondary">
                     <span>
                         <Plus size="30px" />
                     </span>
-                    <p className="text-sm font-semibold">
-                        Blank Resume
-                    </p>
+                    <p className="text-sm font-semibold">Blank Resume</p>
                 </div>
             </div>
 

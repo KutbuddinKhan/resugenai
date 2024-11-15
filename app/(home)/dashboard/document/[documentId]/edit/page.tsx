@@ -1,10 +1,14 @@
+import EditResume from '../../../../_components/EditResume'
+import { ResumeInfoProvider } from '@/context/resume-info-provider'
 import React from 'react'
 
 type Props = {}
 
 const Page = (props: Props) => {
   return (
-    <div>Edit Resume Page</div>
+    <ResumeInfoProvider>
+      <EditResume />
+    </ResumeInfoProvider>
   )
 }
 
