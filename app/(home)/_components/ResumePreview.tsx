@@ -1,8 +1,10 @@
 "use client"
 
+import CertificatesPreview from '@/components/preview/CertificatesPreview'
 import EducationPreview from '@/components/preview/EducationPreview'
 import ExperiencePreview from '@/components/preview/ExperiencePreview'
 import PersonalInfo from '@/components/preview/PersonalInfo'
+import ProjectsPreview from '@/components/preview/ProjectsPreview'
 import SkillsPreview from '@/components/preview/SkillsPreview'
 import SummaryPreview from '@/components/preview/SummaryPreview'
 import { useResumeContext } from '@/context/resume-info-provider'
@@ -34,6 +36,13 @@ const ResumePreview = () => {
 
       {/* Educational Info */}
       <EducationPreview isLoading={isLoading} resumeInfo={resumeInfo} />
+
+      {/* Certificates */}
+      <CertificatesPreview isLoading={isLoading} resumeInfo={resumeInfo} />
+
+      {/* Projexts */}
+      <ProjectsPreview isLoading={isLoading} resumeInfo={resumeInfo} />
+
 
       {/* Skills */}
       <SkillsPreview isLoading={isLoading} resumeInfo={resumeInfo} />

@@ -16,6 +16,8 @@ export const resumeData = {
     address: "1234 Elm Street, CA 90210",
     phone: "(987)-654-3210",
     email: "sarah.johnson@example.com",
+    linkedin: "https://linkedin.com/in/sarah-johnson",
+    portfolio: "https://sarahjohnson.dev",
   },
   summary:
     "Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Proficient in both front-end and back-end development, with a focus on building scalable web applications and improving user experience.",
@@ -31,11 +33,11 @@ export const resumeData = {
       workSummary: `
         <ul>
         <li>Developed scalable web applications using React, TypeScript, and Node.js.</li>
-          <li> Collaborated with cross-functional teams to design, implement, and maintain new features</li>
-          <li> Optimized performance of applications, reducing load times by 30% </li>
-          <li> Integrated third-party services and APIs to enhance application functionality </li>
+        <li>Collaborated with cross-functional teams to design, implement, and maintain new features.</li>
+        <li>Optimized performance of applications, reducing load times by 30%.</li>
+        <li>Integrated third-party services and APIs to enhance application functionality.</li>
         </ul>
-        `,
+      `,
     },
     {
       id: 2,
@@ -46,11 +48,14 @@ export const resumeData = {
       startDate: "Aug 2019",
       endDate: "Jan 2022",
       currentlyWorking: false,
-      workSummary:
-        "• Designed and developed high-performance user interfaces using React and Redux.\n" +
-        "• Worked closely with UX/UI designers to ensure seamless and intuitive user experiences.\n" +
-        "• Implemented responsive design techniques for optimal viewing on all devices.\n" +
-        "• Mentored junior developers and conducted code reviews to maintain high-quality standards.",
+      workSummary: `
+        <ul>
+        <li>Designed and developed high-performance user interfaces using React and Redux.</li>
+        <li>Worked closely with UX/UI designers to ensure seamless and intuitive user experiences.</li>
+        <li>Implemented responsive design techniques for optimal viewing on all devices.</li>
+        <li>Mentored junior developers and conducted code reviews to maintain high-quality standards.</li>
+        </ul>
+      `,
     },
   ],
   educations: [
@@ -74,28 +79,41 @@ export const resumeData = {
     },
   ],
   skills: [
+    { id: 1, name: "React", rating: 5 },
+    { id: 2, name: "Node.js", rating: 3 },
+    { id: 3, name: "TypeScript", rating: 4 },
+    { id: 4, name: "Python", rating: 5 },
+    { id: 4, name: "Nextjs", rating: 5 },
+    { id: 5, name: "GraphQL", rating: 2 },
+  ],
+  projects: [
     {
-      name: "React",
-      rating: 5,
+      title: "AI Resume Builder",
+      description:
+        "Developed an AI-powered resume builder using React, Node.js, and OpenAI's GPT-3. Implemented dynamic content generation and real-time data processing.",
+      technologies: ["React", "Node.js", "OpenAI API", "Tailwind CSS"],
+      link: "https://github.com/sarah-johnson/ai-resume-builder",
     },
     {
-      name: "Node.js",
-      rating: 3,
+      title: "E-commerce Platform",
+      description:
+        "Built a full-stack e-commerce platform using Next.js, MongoDB, and Stripe. Integrated payment gateway and order tracking system.",
+      technologies: ["Next.js", "MongoDB", "Stripe", "Tailwind CSS"],
+      link: "https://sarahjohnson.dev/ecommerce",
+    },
+  ],
+  certificates: [
+    {
+      name: "AWS Certified Solutions Architect",
+      issuingOrganization: "Amazon Web Services",
+      issueDate: "May 2023",
+      certificateLink: "https://aws.amazon.com/certification",
     },
     {
-      id: 3,
-      name: "TypeScript",
-      rating: 4,
-    },
-    {
-      id: 4,
-      name: "Python",
-      rating: 5,
-    },
-    {
-      id: 5,
-      name: "GraphQL",
-      rating: 2,
+      name: "Google Professional Data Engineer",
+      issuingOrganization: "Google Cloud",
+      issueDate: "Sep 2022",
+      certificateLink: "https://cloud.google.com/certification",
     },
   ],
 };

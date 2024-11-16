@@ -1,7 +1,6 @@
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 import { documentTable } from "./document";
 import { relations } from "drizzle-orm";
-
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -16,6 +15,8 @@ export const personalInfoTable = pgTable("personal_info", {
   address: varchar("address", { length: 500 }),
   phone: varchar("phone", { length: 50 }),
   email: varchar("email", { length: 255 }),
+  linkedIn: varchar("linkedin", { length: 255 }), // New Field
+  portfolio: varchar("portfolio", { length: 255 }) // New Field
 });
 
 export const personalInfoRelations = relations(
@@ -38,5 +39,8 @@ export const personalInfoTableSchema = createInsertSchema(personalInfoTable, {
   address: true,
   phone: true,
   email: true,
+  linkedIn: true,
+  portfolio: true,
 });
+
 export type PersonalSchema = z.infer<typeof personalInfoTableSchema>;

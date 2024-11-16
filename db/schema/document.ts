@@ -14,6 +14,8 @@ import { educationTable, educationTableSchema } from "./education";
 import { skillsTable, skillsTableSchema } from "./skills";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { certificateTable, certificateTableSchema } from "./certificates";
+import { projectTable, projectTableSchema } from "./projects";
 
 export const statusEnum = pgEnum("status", ["archived", "private", "public"]);
 
@@ -41,6 +43,8 @@ export const documentRelations = relations(documentTable, ({ one, many }) => {
     experiences: many(experienceTable),
     educations: many(educationTable),
     skills: many(skillsTable),
+    certificates: many(certificateTable),
+    projects: many(projectTable),
   };
 });
 
@@ -69,6 +73,8 @@ export const updateCombinedSchema = z.object({
   education: z.array(educationTableSchema).optional(),
   experience: z.array(experienceTableSchema).optional(),
   skills: z.array(skillsTableSchema).optional(),
+  certificates: z.array(certificateTableSchema).optional(), // added
+  projects: z.array(projectTableSchema).optional() // added
 });
 
 export type DocumentSchema = z.infer<typeof createDocumentTableSchema>;

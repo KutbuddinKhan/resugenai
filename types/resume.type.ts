@@ -38,6 +38,29 @@ export type PersonalInfoType = {
   address?: string | null;
   phone?: string | null;
   email?: string | null;
+  linkedin?: string | null;
+  portfolio?: string | null;
+};
+// New type for Projects
+export type ProjectType = {
+  id?: number;
+  docId?: number | null;
+  title: string;
+  description: string;
+  techStack: string[];
+  startDate: string | null;
+  endDate: string | null;
+  link?: string | null;
+};
+
+// New type for Certificates
+export type CertificateType = {
+  id?: number;
+  docId?: number | null;
+  name: string;
+  issuer: string;
+  issueDate: string;
+  description: string | null;
 };
 
 export type StatusType = "archived" | "private" | "public" | undefined;
@@ -55,5 +78,7 @@ export type ResumeDataType = {
   experiences?: ExperienceType[] | null;
   educations?: EducationType[] | null;
   skills?: SkillType[] | null;
+  projects?: ProjectType[] | null;
+  certificates?: CertificateType[] | null;
   updatedAt?: string;
 };

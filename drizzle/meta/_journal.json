@@ -22,6 +22,20 @@
       "when": 1731583209432,
       "tag": "0002_remarkable_maximus",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1731744819444,
+      "tag": "0003_even_psylocke",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1731745013890,
+      "tag": "0004_grey_stick",
+      "breakpoints": true
     }
   ]
 }
