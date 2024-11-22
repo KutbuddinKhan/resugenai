@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { ResumeDataType } from "@/types/resume.type";
 import { INITIAL_THEME_COLOR } from '@/lib/helper';
 import { Skeleton } from '../ui/skeleton';
+import { Github, Linkedin } from 'lucide-react';
 
 interface PropsType {
     resumeInfo: ResumeDataType | undefined;
@@ -58,7 +59,8 @@ const PersonalInfo: FC<PropsType> = ({
                         rel="noopener noreferrer"
                         className='text-[13px] text-primary underline'
                     >
-                        LinkedIn
+                        <Linkedin size='16px' />
+                        
                     </a>
                 )}
                 {resumeInfo?.personalInfo?.portfolio && (
@@ -66,9 +68,9 @@ const PersonalInfo: FC<PropsType> = ({
                         href={resumeInfo.personalInfo.portfolio} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className='text-[13px] text-primary underline'
+                        className='flex text-[13px] border text-primary underline'
                     >
-                        Portfolio
+                        <Github size='16px' className='mr-1' /> Portfolio
                     </a>
                 )}
             </div>

@@ -12,9 +12,8 @@ import { cn } from '@/lib/utils'
 import React from 'react'
 
 const ResumePreview = () => {
-  const { resumeInfo } = useResumeContext();
+  const { resumeInfo, isLoading } = useResumeContext();
 
-  const isLoading = false
   return (
     <div
       id="resume-preview-id"
