@@ -3,9 +3,9 @@
 import { Button } from '@/components/ui/button'
 import { useResumeContext } from '@/context/resume-info-provider'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { Fascinate_Inline } from 'next/font/google'
 import React, { useState } from 'react'
 import PersonalInfoForm from './forms/PersonalInfoForm'
+import SummaryForm from './forms/SummaryForm'
 
 
 const ResumeForm = () => {
@@ -54,6 +54,10 @@ const ResumeForm = () => {
           {activeFormIndex === 1 && (
             <PersonalInfoForm handleNext={handleNext} />
           )}
+
+          {
+            activeFormIndex === 2 && <SummaryForm handleNext={handleNext} />
+          }
         </div>
       </div>
     </div>

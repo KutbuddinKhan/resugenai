@@ -2,7 +2,6 @@
 
 
 import useGetDocument from '@/features/document/use-get-document-by-id'
-import { resumeData } from '@/lib/dummy'
 import { ResumeDataType } from '@/types/resume.type'
 import { useParams } from 'next/navigation'
 import React, { createContext, FC, useContext, useEffect, useState } from 'react'
