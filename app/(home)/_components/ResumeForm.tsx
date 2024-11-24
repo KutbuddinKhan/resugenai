@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import React, { useState } from 'react'
 import PersonalInfoForm from './forms/PersonalInfoForm'
 import SummaryForm from './forms/SummaryForm'
+import ExperienceForm from './forms/ExperienceForm'
 
 
 const ResumeForm = () => {
@@ -22,31 +23,31 @@ const ResumeForm = () => {
       <div className='shadow-md rounded-md bg-white !border-t-primary !border-t-4 dark:bg-card dark:border dark:border-gray-800'>
         <div className='flex items-center gap-1 px-3 justify-end border-b py-[7px] min-h-10'>
           {activeFormIndex > 1 && (
-            <Button 
+            <Button
               variant='outline'
               size='default'
               className='!px-2 !py-1 !h-auto'
               onClick={() => setActiveFormIndex(activeFormIndex - 1)}
-              >
-                <ArrowLeft size="16px" />
-                Previous
-              </Button>
+            >
+              <ArrowLeft size="16px" />
+              Previous
+            </Button>
           )}
 
           <Button
-             variant="outline"
-             size="default"
-             className="!px-2 !py-1 !h-auto"
-             disabled={
+            variant="outline"
+            size="default"
+            className="!px-2 !py-1 !h-auto"
+            disabled={
               activeFormIndex === 7 || resumeInfo?.status === "archived"
                 ? true
                 : false
-             }
-             onClick={handleNext}
-             >
-              Next
-              <ArrowRight size="16px" />
-             </Button>
+            }
+            onClick={handleNext}
+          >
+            Next
+            <ArrowRight size="16px" />
+          </Button>
         </div>
 
         <div className='px-5 py-3 pb-5'>
@@ -55,9 +56,17 @@ const ResumeForm = () => {
             <PersonalInfoForm handleNext={handleNext} />
           )}
 
+          {/* Summary form */}
           {
             activeFormIndex === 2 && <SummaryForm handleNext={handleNext} />
           }
+
+          {/* Professional Experience form */}
+          {
+            activeFormIndex === 3 && <ExperienceForm handleNext={handleNext} />
+          }
+
+
         </div>
       </div>
     </div>
