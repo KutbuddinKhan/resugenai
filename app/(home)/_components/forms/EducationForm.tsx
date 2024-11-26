@@ -110,26 +110,19 @@ const EducationForm = (props: { handleNext: () => void }) => {
       </div>
       <form onSubmit={handleSubmit}>
         <div
-          className="border w-full h-auto
-              divide-y-[1px] rounded-md px-3 pb-4 my-5
-              "
+          className="border w-full h-auto divide-y-[1px] rounded-md px-3 pb-4 my-5"
         >
           {educationList?.map((item, index) => (
             <div key={index}>
               <div
-                className="relative grid gride-cols-2
-                  mb-5 pt-4 gap-3
-                  "
+                className="relative grid gride-cols-2 mb-5 pt-4 gap-3"
               >
                 {educationList?.length > 1 && (
                   <Button
                     variant="secondary"
                     type="button"
                     disabled={isPending}
-                    className="size-[20px] text-center
-                rounded-full absolute -top-3 -right-5
-                !bg-black dark:!bg-gray-600 text-white
-                "
+                    className="size-[20px] text-center rounded-full absolute -top-3 -right-5 !bg-black dark:!bg-gray-600 text-white"
                     size="icon"
                     onClick={() => removeEducation(index)}
                   >
@@ -204,8 +197,7 @@ const EducationForm = (props: { handleNext: () => void }) => {
               {index === educationList.length - 1 &&
                 educationList.length < 5 && (
                   <Button
-                    className="gap-1 mt-1 text-primary 
-                          border-primary/50"
+                    className="gap-1 mt-1 text-primary border-primary/50"
                     variant="outline"
                     type="button"
                     disabled={isPending}

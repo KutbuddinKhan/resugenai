@@ -44,20 +44,18 @@ export type PersonalInfoType = {
 // New type for Projects
 export type ProjectType = {
   id?: number;
-  docId?: number | null;
-  title: string;
-  description: string;
-  techStack: string[];
-  startDate: string | null;
-  endDate: string | null;
-  link?: string | null;
+  docId?: number | null; // Ensuring this is non-nullable as per the database schema
+  projectName: string | null;
+  projectLink: string | null;
+  description: string | null;
+  technologies: string | null; // Matches `varchar(500)` in the database schema
 };
 
 // New type for Certificates
 export type CertificateType = {
   id?: number;
   docId?: number | null;
-  name: string;
+  title: string;
   issuer: string;
   issueDate: string;
   description: string | null;

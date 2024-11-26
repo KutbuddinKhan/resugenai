@@ -88,18 +88,18 @@ export const resumeData = {
   ],
   projects: [
     {
-      title: "AI Resume Builder",
+      projectName: "AI Resume Builder",
       description:
         "Developed an AI-powered resume builder using React, Node.js, and OpenAI's GPT-3. Implemented dynamic content generation and real-time data processing.",
       technologies: ["React", "Node.js", "OpenAI API", "Tailwind CSS"],
-      link: "https://github.com/sarah-johnson/ai-resume-builder",
+      projectLink: "https://github.com/sarah-johnson/ai-resume-builder",
     },
     {
-      title: "E-commerce Platform",
+      projectName: "E-commerce Platform",
       description:
         "Built a full-stack e-commerce platform using Next.js, MongoDB, and Stripe. Integrated payment gateway and order tracking system.",
       technologies: ["Next.js", "MongoDB", "Stripe", "Tailwind CSS"],
-      link: "https://sarahjohnson.dev/ecommerce",
+      projectLink: "https://sarahjohnson.dev/ecommerce",
     },
   ],
   certificates: [
