@@ -44,7 +44,7 @@ const ResumeTitle: FC<ResumeTitleProps> = ({
                     isLoading === true || status === "archived",
                 }
             )}
-                contentEditable={true}
+                contentEditable={isLoading || status === 'archived' ? false : true }
                 suppressContentEditableWarning={true}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
