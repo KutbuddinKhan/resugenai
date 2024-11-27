@@ -69,6 +69,8 @@ const TopSection = () => {
                     />
                 </div>
                 <div className='flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end'>
+
+                    {/* theme Color */}
                     <ThemeColor />
                     <PreviewModal />
                     <Download />
