@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useResumeContext } from "@/context/resume-info-provider";
 import { Button } from "@/components/ui/button";
-import { Loader, Plus, X } from "lucide-react";
+import { Loader2, Plus, X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -204,14 +204,14 @@ const EducationForm = (props: { handleNext: () => void }) => {
                     onClick={addNewEducation}
                   >
                     <Plus size="15px" />
-                    Add More Education
+                    Add Another Education
                   </Button>
                 )}
             </div>
           ))}
         </div>
         <Button className="mt-4" type="submit" disabled={isPending}>
-          {isPending && <Loader size="15px" className="animate-spin" />}
+          {isPending && <Loader2 size="15px" className="animate-spin" />}
           Save Changes
         </Button>
       </form>

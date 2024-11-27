@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import useUpdateDocument from "@/features/document/use-update-documents";
-import { Plus, X, Loader } from "lucide-react";
+import { Plus, X, Loader2 } from "lucide-react";
 
 const initialState = {
     id: undefined,
@@ -166,14 +166,14 @@ const CertificationsForm = (props: { handleNext: () => void }) => {
                                         onClick={addNewCertificate}
                                     >
                                         <Plus size="15px" />
-                                        Add More Certification
+                                        Add Another Certification
                                     </Button>
                                 )}
                         </div>
                     ))}
                 </div>
                 <Button className="mt-4" type="submit" disabled={isPending}>
-                    {isPending && <Loader size="15px" className="animate-spin" />}
+                    {isPending && <Loader2 size="15px" className="animate-spin" />}
                     Save Changes
                 </Button>
             </form>

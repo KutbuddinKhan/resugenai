@@ -10,6 +10,7 @@ import ExperienceForm from './forms/ExperienceForm'
 import EducationForm from './forms/EducationForm'
 import CertificationsForm from './forms/CertificationsForm'
 import ProjectForm from './forms/ProjectForm'
+import SkillsForm from './forms/SkillsForm'
 
 
 const ResumeForm = () => {
@@ -77,6 +78,9 @@ const ResumeForm = () => {
 
           {/* Project Form */}
           {activeFormIndex === 6 && <ProjectForm handleNext={handleNext} />}
+
+          {/* Skill Form */}
+          {activeFormIndex === 7 && <SkillsForm />}
 
 
         </div>
