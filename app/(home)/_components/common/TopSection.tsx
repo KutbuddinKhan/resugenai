@@ -72,8 +72,16 @@ const TopSection = () => {
 
                     {/* theme Color */}
                     <ThemeColor />
+                    
+                    {/* Preview Modal */}
                     <PreviewModal />
-                    <Download />
+
+                    {/* Download Resume */}
+                    <Download 
+                        title={resumeInfo?.title || "Untitled Resume"}
+                        status={resumeInfo?.status}
+                        isLoading={isLoading}
+                    />
                     <Share />
                     <MoreOption />
                 </div>
