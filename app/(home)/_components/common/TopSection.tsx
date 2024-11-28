@@ -82,6 +82,7 @@ const TopSection = () => {
                         status={resumeInfo?.status}
                         isLoading={isLoading}
                     />
+
                     <Share />
                     <MoreOption />
                 </div>

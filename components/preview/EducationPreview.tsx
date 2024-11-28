@@ -15,7 +15,7 @@ const EducationPreview = ({ resumeInfo, isLoading }: PropsType) => {
         return <SkeletonLoader />
     }
     return (
-        <div className='w-full my-5'>
+        <div className='w-full mt-36 mb-5'>
             <h5
                 className='text-center font-bold mb-2'
                 style={{ color: themeColor }}

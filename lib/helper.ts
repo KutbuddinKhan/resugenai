@@ -28,5 +28,10 @@ export const generateThumbnail = async () => {
 
 export const formatFileName = (title: string, useHyphen: boolean = true) => {
   const delimiter = useHyphen ? "-" : "_"
-  return title.trim().replace(/\s+/g, delimiter) + "pdf";
+  const sanitizedTitle = title
+    .trim()
+    .replace(/[^a-z0-9]/gi, delimiter) // Replace special characters
+    .replace(new RegExp(`${delimiter}+`, 'g'), delimiter) // Remove multiple consecutive delimiters
+  
+  return `${sanitizedTitle}-resume.pdf`
 }

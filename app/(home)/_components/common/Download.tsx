@@ -35,7 +35,7 @@ const Download = (props: {
       const pdf = new jsPDF()
 
       const imgWidth = 210; // A4 size in mm
-      const pageHeight = 295;
+      const pageHeight = 300;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       let heightLeft = imgHeight
