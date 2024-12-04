@@ -188,7 +188,7 @@ const PersonalInfoForm = (props: { handleNext: () => void }) => {
                                 type="url"
                                 required
                                 autoComplete="off"
-                                placeholder="https://www.linkedin.com/in/yourprofile"
+                                placeholder=""
                                 value={personalInfo?.linkedin || ""}
                                 onChange={handleChange}
                             />
@@ -203,7 +203,7 @@ const PersonalInfoForm = (props: { handleNext: () => void }) => {
                                 type="url"
                                 required
                                 autoComplete="off"
-                                placeholder="https://yourportfolio.com"
+                                placeholder=""
                                 value={personalInfo?.portfolio || ""}
                                 onChange={handleChange}
                             />

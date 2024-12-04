@@ -340,8 +340,8 @@ const documentRoute = new Hono()
         );
       } catch (error) {
         return c.json(
-          { 
-            error: "An error occurred while updating the document" 
+          {
+            error: "An error occurred while updating the document",
           },
           500
         );
@@ -401,6 +401,8 @@ const documentRoute = new Hono()
             personalInfo: true,
             experiences: true,
             educations: true,
+            certificates: true,
+            projects: true,
             skills: true,
           },
         });
@@ -417,6 +419,52 @@ const documentRoute = new Hono()
           },
           500
         );
+      }
+    }
+  )
+  .get(
+    "public/doc/:documentId",
+    zValidator(
+      "param",
+      z.object({
+        documentId: z.string(),
+      })
+    ),
+    async (c) => {
+      try {
+        const { documentId } = c.req.valid("param")
+        const documentData = await db.query.documentTable.findFirst({
+          where: and(
+            eq(documentTable.status, 'public'),
+            eq(documentTable.documentId, documentId)
+          ),
+          with: {
+            personalInfo: true,
+            experiences: true,
+            educations: true,
+            certificates: true,
+            projects: true,
+            skills: true,
+          },
+        })
+
+        if (!documentData) {
+          return c.json({
+            error: true,
+            message: 'unauthorized',
+          }, 401)
+        }
+
+        return c.json({
+          success: true,
+          data: documentData,
+        })
+      } catch (error) {
+        return c.json({
+          success: false,
+          message: "Failed to fetch documents",
+          error: error, 
+        }, 500)
       }
     }
   );
