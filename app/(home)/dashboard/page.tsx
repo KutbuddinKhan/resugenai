@@ -1,6 +1,7 @@
 import React from 'react'
 import AddResume from '../_components/AddResume'
 import ResumeList from '../_components/ResumeList'
+import TrashListBox from '../_components/TrashListBox'
 
 const Page = () => {
   return (
@@ -11,6 +12,11 @@ const Page = () => {
             <h1 className='text-2xl font-bold'>ResuGenie.ai</h1>
             <p className='text-base dark:text-inherit'>Craft a Professional Resume in Minutes with AI</p>
           </div>
+        </div>
+
+        <div className='shrink-0 flex items-center gap-3'>
+        {/* Ṭrash List */}
+          <TrashListBox />
         </div>
 
         <div className='w-full pt-11'>

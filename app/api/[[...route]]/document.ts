@@ -341,7 +341,75 @@ const documentRoute = new Hono()
       } catch (error) {
         return c.json(
           {
-            error: "An error occurred while updating the document",
+            success: false,
+            message: "Error updating project",
+            error: error,
+          },
+          500
+        );
+      }
+    }
+  )
+  .patch(
+    "/restore/archive",
+    zValidator(
+      "json",
+      z.object({
+        documentId: z.string(),
+        status: z.string(),
+      })
+    ),
+    getAuthUser,
+    async (c) => {
+      try {
+        const user = c.get("user");
+        const userId = user.id;
+
+        const { documentId, status } = c.req.valid("json");
+
+        if (!documentId) {
+          return c.json({ message: "DocumentId must provided" }, 400);
+        }
+
+        if (status !== "archived") {
+          return c.json(
+            { message: "Status must be archived before restore" },
+            400
+          );
+        }
+
+        const [documentData] = await db
+          .update(documentTable)
+          .set({
+            status: "private",
+          })
+          .where(
+            and(
+              eq(documentTable.userId, userId),
+              eq(documentTable.documentId, documentId),
+              eq(documentTable.status, "archived")
+            )
+          )
+          .returning();
+
+        if (!documentData) {
+          return c.json({ message: "Document not found" }, 404);
+        }
+
+        return c.json(
+          {
+            success: "ok",
+            message: "Updated successfully",
+            data: documentData,
+          },
+          { status: 200 }
+        );
+      } catch (error) {
+        return c.json(
+          {
+            success: false,
+            message: "Failed to retore document",
+            error: error,
           },
           500
         );
@@ -432,10 +500,10 @@ const documentRoute = new Hono()
     ),
     async (c) => {
       try {
-        const { documentId } = c.req.valid("param")
+        const { documentId } = c.req.valid("param");
         const documentData = await db.query.documentTable.findFirst({
           where: and(
-            eq(documentTable.status, 'public'),
+            eq(documentTable.status, "public"),
             eq(documentTable.documentId, documentId)
           ),
           with: {
@@ -446,27 +514,62 @@ const documentRoute = new Hono()
             projects: true,
             skills: true,
           },
-        })
+        });
 
         if (!documentData) {
-          return c.json({
-            error: true,
-            message: 'unauthorized',
-          }, 401)
+          return c.json(
+            {
+              error: true,
+              message: "unauthorized",
+            },
+            401
+          );
         }
 
         return c.json({
           success: true,
           data: documentData,
-        })
+        });
       } catch (error) {
-        return c.json({
-          success: false,
-          message: "Failed to fetch documents",
-          error: error, 
-        }, 500)
+        return c.json(
+          {
+            success: false,
+            message: "Failed to fetch documents",
+            error: error,
+          },
+          500
+        );
       }
     }
-  );
+  )
+  .get("/trash/all", getAuthUser, async (c) => {
+    try {
+      const user = c.get("user");
+      const userId = user.id;
+      const documents = await db
+        .select()
+        .from(documentTable)
+        .where(
+          and(
+            eq(documentTable.userId, userId),
+            eq(documentTable.status, "archived")
+          )
+        );
+
+      return c.json({
+        success: true,
+        data: documents,
+      });
+    } catch (error) {
+      return c.json(
+        {
+          success: false,
+          message: "Failed to fetch documents",
+          error: error,
+        },
+        500
+      );
+    }
+  });
 
 export default documentRoute;
