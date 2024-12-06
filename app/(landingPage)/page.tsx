@@ -1,12 +1,21 @@
-import { Button } from "@/components/ui/button";
-import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { FeatureCards } from "./_components/FeatureCards";
+import { Footer } from "./_components/Footer";
+import { Header } from "./_components/Header";
+import { Hero } from "./_components/Hero";
+import { ImageSection } from "./_components/ImageSection";
 
 
 export default function Home() {
   return (
-    <div>
-      <LoginLink>Sign in</LoginLink>
-      <RegisterLink>Sign up</RegisterLink>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">
+        <Hero />
+        <ImageSection />
+        <FeatureCards />
+      </main>
+      <Footer />
     </div>
-  );
+  )
 }
+
