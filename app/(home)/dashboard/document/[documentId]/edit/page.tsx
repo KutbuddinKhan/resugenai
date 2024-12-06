@@ -2,9 +2,8 @@ import EditResume from '../../../../_components/EditResume'
 import { ResumeInfoProvider } from '@/context/resume-info-provider'
 import React from 'react'
 
-type Props = {}
 
-const Page = (props: Props) => {
+const Page = () => {
   return (
     <ResumeInfoProvider>
       <EditResume />

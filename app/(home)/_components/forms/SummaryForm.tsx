@@ -76,7 +76,7 @@ const SummaryForm = (props: { handleNext: () => void }) => {
                 }
             );
         },
-        [resumeInfo]
+        [handleNext, mutateAsync, resumeInfo]
     );
 
     const GenerateSummaryFromAI = async () => {

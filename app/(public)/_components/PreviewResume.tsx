@@ -5,7 +5,7 @@ import PersonalInfo from '@/components/preview/PersonalInfo';
 import ProjectsPreview from '@/components/preview/ProjectsPreview';
 import SkillPreview from '@/components/preview/SkillsPreview';
 import SummaryPreview from '@/components/preview/SummaryPreview';
-import { INITIAL_THEME_COLOR } from '@/lib/helper';
+// import { INITIAL_THEME_COLOR } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { ResumeDataType } from '@/types/resume.type'
 import React from 'react'
@@ -15,7 +15,7 @@ const PreviewResume = (props: {
     resumeInfo: ResumeDataType;
 }) => {
     const { isLoading, resumeInfo } = props;
-    const themeColor = resumeInfo?.themeColor || INITIAL_THEME_COLOR;
+    // const themeColor = resumeInfo?.themeColor || INITIAL_THEME_COLOR;
     return (
         <div
             className={cn(`

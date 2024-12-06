@@ -22,9 +22,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import React, { Fragment } from "react";
 
-type Props = {};
 
-const Header = (props: Props) => {
+const Header = () => {
     const { setTheme } = useTheme();
 
     const { user, isAuthenticated, isLoading, error } = useKindeBrowserClient();

@@ -3,17 +3,14 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import Header from './_components/common/Header';
 
-type Props = {}
-
 const MainLayout = async ({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) => {
-    const { isAuthenticated, getUser } = getKindeServerSession()
+    const { isAuthenticated } = getKindeServerSession()
     const isUserAuthenticated = await isAuthenticated()
 
-    const user = await getUser()
 
     if (!isUserAuthenticated) {
         redirect("/")

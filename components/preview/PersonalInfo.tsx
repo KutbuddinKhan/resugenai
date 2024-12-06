@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { ResumeDataType } from "@/types/resume.type";
 import { INITIAL_THEME_COLOR } from '@/lib/helper';
 import { Skeleton } from '../ui/skeleton';
-import { Github, Linkedin, ExternalLink } from 'lucide-react';
+import { Linkedin, ExternalLink } from 'lucide-react';
 
 interface PropsType {
     resumeInfo: ResumeDataType | undefined;

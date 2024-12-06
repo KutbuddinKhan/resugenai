@@ -5,7 +5,7 @@ import { HTTPException } from "hono/http-exception";
 
 type Env = {
   Variables: {
-    user: KindeUser<Record<string, any>>;
+    user: KindeUser<Record<string, unknown>>;
   };
 };
 

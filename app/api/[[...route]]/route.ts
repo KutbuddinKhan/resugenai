@@ -18,6 +18,7 @@ app.onError((err, c) => {
   return c.json({ error: "Internal Server Error" });
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes = app.basePath("/api").route("/document", documentRoute);
 
 app.get("/", (c) => {

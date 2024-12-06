@@ -22,7 +22,7 @@ import { AIChatSession } from '@/lib/gemini-ai-model';
 type RichTextEditorProps = {
     jobTitle: string | null;
     initialValue: string;
-    onEditorChange: (e: any) => void;
+    onEditorChange: (e: unknown) => void;
 };
 
 const PROMPT = `Given the job title "{jobTitle}",
@@ -65,7 +65,7 @@ const RichTextEditor = (props: RichTextEditorProps) => {
             parsedResponse = JSON.parse(responseText);
           } catch (jsonError) {
             // console.error('JSON Parsing Error:', jsonError);
-            throw new Error('Invalid response format from AI.');
+            throw new Error(`Invalid response format from AI. ${jsonError}`);
           }
       
           // Extract and validate bullet points
@@ -84,12 +84,12 @@ const RichTextEditor = (props: RichTextEditorProps) => {
             description: 'Your AI-generated summary is ready to be edited.',
           });
         } catch (error) {
-        //   console.error('Error generating summary:', error);
+          console.error('Error generating summary:', error);
       
           // Show detailed error message
           toast({
             title: 'Error generating summary',
-            description:'Something went wrong. Please try again.',
+            description:`Something went wrong. Please try again.`,
             variant: 'destructive',
           });
         } finally {
