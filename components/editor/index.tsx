@@ -22,7 +22,7 @@ import { AIChatSession } from '@/lib/gemini-ai-model';
 type RichTextEditorProps = {
     jobTitle: string | null;
     initialValue: string;
-    onEditorChange: (e: unknown) => void;
+    onEditorChange: (value: string) => void;
 };
 
 const PROMPT = `Given the job title "{jobTitle}",

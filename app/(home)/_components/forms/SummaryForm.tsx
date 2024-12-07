@@ -19,6 +19,16 @@ interface GeneratesSummaryType {
     experienced: string;
 }
 
+interface SummaryItem {
+    experienceLevel: string;
+    summary: string[];
+}
+
+interface AIResponse {
+    summaries: SummaryItem[];
+}
+
+
 const prompt = `Job Title: {jobTitle}. Generate comprehensive, concise resume summaries in JSON format for three experience levels: fresher, mid-level, and experienced. Each summary should be 3-4 lines, engaging, and tailored to the role of a Software Developer. Highlight specific programming languages, tools, frameworks, and methodologies relevant to this job. The summaries should demonstrate a strong personal tone, unique strengths, growth trajectory, and collaborative achievements, aligning with industry standards. Avoid placeholders, ensuring relevance, clarity, and impact at each experience level.`;
 
 const SummaryForm = (props: { handleNext: () => void }) => {
@@ -90,48 +100,33 @@ const SummaryForm = (props: { handleNext: () => void }) => {
                 });
                 return;
             }
-
+    
             setLoading(true);
-
+    
             const PROMPT = prompt.replace("{jobTitle}", jobTitle);
             const result = await AIChatSession.sendMessage(PROMPT);
-
-            // Extract raw text response
+    
             const responseText = await result.response.text();
-
-            console.log(responseText);
-
-            // Validate JSON response
-            try {
-                const parsedResponse = JSON.parse(responseText);
-
-                if (Array.isArray(parsedResponse.summaries)) {
-                    // Remove duplicates and normalize experience levels
-                    const summaries = parsedResponse.summaries.reduce(
-                        (acc: GeneratesSummaryType, item: any) => {
-                            const experienceLevel =
-                                item.experienceLevel.toLowerCase().replace(/mid[-\s]?level/, "mid") as keyof GeneratesSummaryType;
-
-                            if (!acc[experienceLevel]) {
-                                acc[experienceLevel] = item.summary[0]; // Assuming summary is an array
-                            }
-                            return acc;
-                        },
-                        { fresher: "", mid: "", experienced: "" } // Initial value
-                    );
-
-                    setAiGeneratedSummary(summaries);
-                } else {
-                    throw new Error("Unexpected response structure.");
-                }
-            } catch (jsonError) {
-                console.error("Error parsing AI response as JSON:", jsonError);
-                toast({
-                    title: "Failed to generate summary",
-                    description: "The AI response could not be parsed. Please try again.",
-                    variant: "destructive",
-                });
-            }
+    
+            // Parse JSON response
+            const parsedResponse: AIResponse = JSON.parse(responseText);
+    
+            const summaries = parsedResponse.summaries.reduce(
+                (acc: GeneratesSummaryType, item: { experienceLevel: string; summary: string[] }) => {
+                    const experienceLevel = item.experienceLevel
+                        .toLowerCase()
+                        .replace(/mid[-\s]?level/, "mid") as keyof GeneratesSummaryType;
+            
+                    if (!acc[experienceLevel]) {
+                        acc[experienceLevel] = item.summary[0]; // Assuming summary is an array
+                    }
+                    return acc;
+                },
+                { fresher: "", mid: "", experienced: "" } // Initial value
+            );
+            
+    
+            setAiGeneratedSummary(summaries);
         } catch (error) {
             console.error("Error generating summary:", error);
             toast({
@@ -143,7 +138,8 @@ const SummaryForm = (props: { handleNext: () => void }) => {
             setLoading(false);
         }
     };
-
+    
+    
 
     const handleSelect = useCallback(
         (summary: string) => {

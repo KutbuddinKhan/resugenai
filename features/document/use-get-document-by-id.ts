@@ -29,8 +29,8 @@ const useGetDocument = (documentId: string, isPublic: boolean = false) => {
         success,
       };
     },
-    retry: 3,
-    // retry: isPublic ? false : 3,
+    // retry: 3,
+    retry: isPublic ? false : 3,
     // enabled: false,
   });
 

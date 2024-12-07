@@ -55,10 +55,10 @@ export type ProjectType = {
 export type CertificateType = {
   id?: number;
   docId?: number | null;
-  title: string;
-  issuer: string;
-  issueDate: string;
-  description: string | null;
+  title: string; // Non-null if sanitizing properly
+  issuer: string; // Ensure `issuer` is non-null after sanitization
+  issueDate?: string | null;
+  description?: string | null;
 };
 
 export type StatusType = "archived" | "private" | "public" | undefined;

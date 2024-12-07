@@ -48,7 +48,7 @@ const TopSection = () => {
                 }
             )
         },
-        [resumeInfo, onUpdate]
+        [resumeInfo, mutateAsync, onUpdate]
     )
 
     return (

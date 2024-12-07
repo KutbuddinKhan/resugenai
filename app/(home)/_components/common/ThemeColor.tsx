@@ -64,23 +64,6 @@ const ThemeColor = () => {
 
   const debouncedColor = useDebounce<string>(selectedColor, 1000)
 
-  useEffect(() => {
-    if (debouncedColor) onSave();
-  }, [debouncedColor])
-
-  const onColorSelect = useCallback(
-    (color: string) => {
-      setSelectedColor(color);
-
-      if (!resumeInfo) return 
-      onUpdate({
-        ...resumeInfo,
-        themeColor: color,
-      })
-    },
-    [resumeInfo, onUpdate]
-  )
-
   const onSave = useCallback(async () => {
     if (!selectedColor) return 
     if(selectedColor === INITIAL_THEME_COLOR) return 
@@ -104,7 +87,26 @@ const ThemeColor = () => {
         })
       }
     })
-  }, [selectedColor])
+  }, [mutateAsync, selectedColor])
+
+  useEffect(() => {
+    if (debouncedColor) onSave();
+  }, [debouncedColor, onSave])
+
+  const onColorSelect = useCallback(
+    (color: string) => {
+      setSelectedColor(color);
+
+      if (!resumeInfo) return 
+      onUpdate({
+        ...resumeInfo,
+        themeColor: color,
+      })
+    },
+    [resumeInfo, onUpdate]
+  )
+
+  
   
   return (
     <Popover>

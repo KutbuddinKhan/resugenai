@@ -26,7 +26,7 @@ const CertificatesPreview: FC<PropsType> = ({ resumeInfo, isLoading }) => {
                 {resumeInfo?.certificates?.map((certificate, index) => (
                     <div key={index}>
                         <h5 className='text-[15px] font-bold' style={{ color: themeColor }}>
-                            {certificate?.name}
+                            {certificate?.title}
                         </h5>
                         <div className='flex items-start justify-between mb-1'>
                             <span className='text-[13px] italic'>
