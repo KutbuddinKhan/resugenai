@@ -10,9 +10,10 @@ import { toast } from "@/hooks/use-toast";
 import { AIChatSession } from "@/lib/gemini-ai-model";
 import { generateThumbnail } from "@/lib/helper";
 import { ResumeDataType } from "@/types/resume.type";
-import { Loader, Sparkles } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import React, { useCallback, useState } from "react";
 
+// Interfaces for type safety
 interface GeneratesSummaryType {
     fresher: string;
     mid: string;
@@ -28,19 +29,45 @@ interface AIResponse {
     summaries: SummaryItem[];
 }
 
+// Detailed AI generation prompt
+const prompt = `Job Title: {jobTitle}. Generate comprehensive, concise resume summaries in JSON format for three experience levels: fresher, mid-level, and experienced. Each summary should be:
+- 3-4 lines long
+- Engaging and tailored to a Software Developer role
+- Highlight specific programming languages, tools, frameworks, and methodologies
+- Demonstrate personal tone, unique strengths, and growth trajectory
+- Align with industry standards
 
-const prompt = `Job Title: {jobTitle}. Generate comprehensive, concise resume summaries in JSON format for three experience levels: fresher, mid-level, and experienced. Each summary should be 3-4 lines, engaging, and tailored to the role of a Software Developer. Highlight specific programming languages, tools, frameworks, and methodologies relevant to this job. The summaries should demonstrate a strong personal tone, unique strengths, growth trajectory, and collaborative achievements, aligning with industry standards. Avoid placeholders, ensuring relevance, clarity, and impact at each experience level.`;
+Respond ONLY with a valid JSON object in this exact structure:
+{
+  "summaries": [
+    {
+      "experienceLevel": "Fresher",
+      "summary": ["Summary text for fresher level"]
+    },
+    {
+      "experienceLevel": "Mid-level",
+      "summary": ["Summary text for mid-level"]
+    },
+    {
+      "experienceLevel": "Experienced",
+      "summary": ["Summary text for experienced level"]
+    }
+  ]
+}
+
+Ensure no placeholders, maximum relevance, clarity, and impact.`;
 
 const SummaryForm = (props: { handleNext: () => void }) => {
     const { handleNext } = props;
     const { resumeInfo, onUpdate } = useResumeContext();
-
     const { mutateAsync, isPending } = useUpdateDocument();
 
+    // State management
     const [loading, setLoading] = useState(false);
-    const [aiGeneratedSummary, setAiGeneratedSummary] =
+    const [aiGeneratedSummary, setAiGeneratedSummary] = 
         useState<GeneratesSummaryType | null>(null);
 
+    // Handle textarea change
     const handleChange = (e: { target: { value: string } }) => {
         const { value } = e.target;
         const resumeDataInfo = resumeInfo as ResumeDataType;
@@ -51,6 +78,7 @@ const SummaryForm = (props: { handleNext: () => void }) => {
         onUpdate(updatedInfo);
     };
 
+    // Submit form handler
     const handleSubmit = useCallback(
         async (e: { preventDefault: () => void }) => {
             e.preventDefault();
@@ -89,8 +117,10 @@ const SummaryForm = (props: { handleNext: () => void }) => {
         [handleNext, mutateAsync, resumeInfo]
     );
 
+    // AI Summary Generation
     const GenerateSummaryFromAI = async () => {
         try {
+            // Validate job title
             const jobTitle = resumeInfo?.personalInfo?.jobTitle;
             if (!jobTitle) {
                 toast({
@@ -103,44 +133,83 @@ const SummaryForm = (props: { handleNext: () => void }) => {
     
             setLoading(true);
     
+            // Prepare and send AI prompt
             const PROMPT = prompt.replace("{jobTitle}", jobTitle);
             const result = await AIChatSession.sendMessage(PROMPT);
     
             const responseText = await result.response.text();
     
-            // Parse JSON response
-            const parsedResponse: AIResponse = JSON.parse(responseText);
+            // Robust JSON parsing
+            let parsedResponse: AIResponse;
+            try {
+                // Clean response and parse
+                const cleanedResponse = responseText
+                    .replace(/```json\n?/g, '')   // Remove code block markers
+                    .replace(/```/g, '')          // Remove any other code block markers
+                    .trim();                      // Remove leading/trailing whitespace
+                
+                parsedResponse = JSON.parse(cleanedResponse);
+            } catch (parseError) {
+                console.error("JSON Parsing Error:", parseError);
+                console.error("Raw Response:", responseText);
+                
+                toast({
+                    title: "AI Response Error",
+                    description: "Failed to parse AI response. Please try again.",
+                    variant: "destructive",
+                });
+                return;
+            }
     
+            // Validate response structure
+            if (!parsedResponse || !parsedResponse.summaries || !Array.isArray(parsedResponse.summaries)) {
+                toast({
+                    title: "Invalid AI Response",
+                    description: "The AI response does not match the expected format.",
+                    variant: "destructive",
+                });
+                return;
+            }
+    
+            // Process summaries
             const summaries = parsedResponse.summaries.reduce(
                 (acc: GeneratesSummaryType, item: { experienceLevel: string; summary: string[] }) => {
                     const experienceLevel = item.experienceLevel
                         .toLowerCase()
                         .replace(/mid[-\s]?level/, "mid") as keyof GeneratesSummaryType;
             
-                    if (!acc[experienceLevel]) {
-                        acc[experienceLevel] = item.summary[0]; // Assuming summary is an array
+                    if (!acc[experienceLevel] && item.summary.length > 0) {
+                        acc[experienceLevel] = item.summary[0];
                     }
                     return acc;
                 },
-                { fresher: "", mid: "", experienced: "" } // Initial value
+                { fresher: "", mid: "", experienced: "" }
             );
             
+            // Additional validation
+            if (!summaries.fresher || !summaries.mid || !summaries.experienced) {
+                toast({
+                    title: "Incomplete AI Response",
+                    description: "Could not generate complete summaries. Please try again.",
+                    variant: "destructive",
+                });
+                return;
+            }
     
             setAiGeneratedSummary(summaries);
         } catch (error) {
-            console.error("Error generating summary:", error);
+            console.error("Comprehensive Error in GenerateSummaryFromAI:", error);
             toast({
                 title: "Failed to generate summary",
-                description: "An error occurred while processing the AI response.",
+                description: "An unexpected error occurred. Please try again.",
                 variant: "destructive",
             });
         } finally {
             setLoading(false);
         }
     };
-    
-    
 
+    // Select AI generated summary
     const handleSelect = useCallback(
         (summary: string) => {
             if (!resumeInfo) return;
@@ -171,7 +240,7 @@ const SummaryForm = (props: { handleNext: () => void }) => {
                             type="button"
                             className="gap-1"
                             disabled={loading || isPending}
-                            onClick={() => GenerateSummaryFromAI()}
+                            onClick={GenerateSummaryFromAI}
                         >
                             <Sparkles size="15px" className="text-primary" />
                             Generate with AI
@@ -207,7 +276,6 @@ const SummaryForm = (props: { handleNext: () => void }) => {
                         </div>
                     )}
 
-
                     <Button
                         className="mt-4"
                         type="submit"
@@ -217,7 +285,7 @@ const SummaryForm = (props: { handleNext: () => void }) => {
                                 : false
                         }
                     >
-                        {isPending && <Loader size="15px" className="animate-spin" />}
+                        {isPending && <Loader2 size="15px" className="animate-spin" />}
                         Save Changes
                     </Button>
                 </form>
